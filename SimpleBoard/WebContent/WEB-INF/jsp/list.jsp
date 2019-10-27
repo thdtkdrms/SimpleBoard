@@ -28,7 +28,7 @@
 	<% for(BoardVo vo:data) { %>
 		<tr>
 			<td><%=vo.getI_board() %></td>
-			<td><% out.print(vo.getTitle()); %></td>
+			<td><a href="detail?i_board=<%=vo.getI_board()%>"><%=vo.getTitle() %></td>
 			<td><%=vo.getRegDateTime() %></td>		
 		</tr>
 	
