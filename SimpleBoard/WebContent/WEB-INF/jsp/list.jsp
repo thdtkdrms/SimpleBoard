@@ -23,14 +23,12 @@
 		<tr>
 			<th>번호</th>
 			<th>제목</th>
-			<th>내용</th>
 			<th>날짜</th>
 		</tr>
 	<% for(BoardVo vo:data) { %>
 		<tr>
 			<td><%=vo.getI_board() %></td>
 			<td><% out.print(vo.getTitle()); %></td>
-			<td><% out.print(vo.getContent()); %></td>
 			<td><%=vo.getRegDateTime() %></td>		
 		</tr>
 	
