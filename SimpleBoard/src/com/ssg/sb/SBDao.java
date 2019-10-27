@@ -1,9 +1,7 @@
 package com.ssg.sb;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.*;
 
 public class SBDao {
 	public static void main(String[] args) {
@@ -50,6 +48,7 @@ public class SBDao {
 		return result;
 	}
 	*/
+	//글쓰기
 	public static int insertBoard(BoardVo vo) {
 		int result = 0;
 		
@@ -78,7 +77,37 @@ public class SBDao {
 		return result;
 	}
 
-	
+	//글쓴거 가져오기
+	public static List<BoardVo> getBoardList(){
+		List<BoardVo> list = new ArrayList();
+		
+		String query = " SELECT * FROM T_BOARD ";
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		try {
+			con = getCon();
+			ps = con.prepareStatement(query);
+			rs = ps.executeQuery();  //select는 executeQuery
+			while(rs.next()) {
+				int i_board = rs.getInt("i_board"); // 컬럼 입력(대소문자 가리지않음)
+				String title = rs.getString("title");
+				String content = rs.getString("content");
+				String regDateTime = rs.getString("regdatetime");
+				
+				BoardVo vo = new BoardVo(i_board, title, content, regDateTime);
+				list.add(vo);
+			}			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(con, ps);
+		}
+		
+		return list;
+	}
 	
 	
 	
